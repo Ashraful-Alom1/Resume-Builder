@@ -38,12 +38,16 @@ A full-featured Resume Builder web application built with **Spring Boot 3.2**, *
 
 ### Run Locally
 ```bash
-git clone https://github.com/Ashraful-Alom1/resume-builder.git
-cd resume-builder
+git clone https://github.com/Ashraful-Alom1/Resume-Builder.git
+cd Resume-Builder
 mvn spring-boot:run
 ```
 
-Open your browser at **http://localhost:8080**
+### Live Demo
+🚀 **[View Live Demo](https://resume-builder-alom.onrender.com)**  
+*(If the link is not active yet, please deploy via the button below)*
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/Ashraful-Alom1/Resume-Builder)
 
 ### Build JAR
 ```bash
