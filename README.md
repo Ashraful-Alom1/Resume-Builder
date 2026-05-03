@@ -43,9 +43,11 @@ cd Resume-Builder
 mvn spring-boot:run
 ```
 
-### Live Demo
+Open your browser at **http://localhost:8080**
+
+### Live Demo (Requires Deployment)
 🚀 **[View Live Demo](https://resume-builder-alom.onrender.com)**  
-*(If the link is not active yet, please deploy via the button below)*
+*(Note: This link will be active once you deploy the project using the button below)*
 
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/Ashraful-Alom1/Resume-Builder)
 
