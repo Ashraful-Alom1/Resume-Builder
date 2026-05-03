@@ -1,0 +1,74 @@
+<!-- Modern Template - Two Column with Sidebar -->
+<div class="resume-modern" xmlns:th="http://www.thymeleaf.org">
+    <style>
+        .resume-modern { font-family: 'Helvetica Neue', Arial, sans-serif; display: flex; min-height: 900px; color: #333; line-height: 1.6; }
+        .resume-modern .sidebar { width: 220px; background: #1a1a2e; color: #e0e0e0; padding: 32px 20px; flex-shrink: 0; }
+        .resume-modern .main-content { flex: 1; padding: 32px 28px; }
+        .resume-modern .name { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 4px; word-wrap: break-word; }
+        .resume-modern .job-title-text { font-size: 12px; color: #6c63ff; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 20px; }
+        .resume-modern .sidebar-section { margin-bottom: 22px; }
+        .resume-modern .sidebar-heading { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #6c63ff; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 2px solid #6c63ff; }
+        .resume-modern .contact-item { font-size: 11px; margin-bottom: 6px; color: #c0c0d0; word-wrap: break-word; }
+        .resume-modern .contact-item strong { color: #e0e0e0; }
+        .resume-modern .skill-bar-container { margin-bottom: 8px; }
+        .resume-modern .skill-name { font-size: 11px; margin-bottom: 3px; color: #e0e0e0; }
+        .resume-modern .skill-bar { height: 4px; background: #2a2a4a; border-radius: 2px; overflow: hidden; }
+        .resume-modern .skill-bar-fill { height: 100%; background: linear-gradient(90deg, #6c63ff, #00d4aa); border-radius: 2px; }
+        .resume-modern .main-heading { font-size: 14px; font-weight: 700; color: #1a1a2e; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; padding-bottom: 6px; border-bottom: 2px solid #6c63ff; margin-top: 20px; }
+        .resume-modern .main-heading:first-child { margin-top: 0; }
+        .resume-modern .summary-text { font-size: 12px; color: #555; line-height: 1.7; }
+        .resume-modern .exp-item { margin-bottom: 16px; }
+        .resume-modern .exp-title { font-size: 13px; font-weight: 700; color: #1a1a2e; }
+        .resume-modern .exp-company { font-size: 12px; color: #6c63ff; font-weight: 600; }
+        .resume-modern .exp-date { font-size: 11px; color: #888; margin-bottom: 4px; }
+        .resume-modern .exp-desc { font-size: 11px; color: #555; line-height: 1.6; }
+        .resume-modern .edu-item { margin-bottom: 12px; }
+        .resume-modern .edu-degree { font-size: 13px; font-weight: 700; color: #1a1a2e; }
+        .resume-modern .edu-school { font-size: 12px; color: #6c63ff; font-weight: 600; }
+        .resume-modern .edu-date { font-size: 11px; color: #888; }
+        .resume-modern .edu-gpa { font-size: 11px; color: #555; }
+    </style>
+    <div class="sidebar">
+        <div class="name" th:text="${resume.personalInfo.fullName} ?: 'Your Name'">Your Name</div>
+        <div class="job-title-text" th:text="${resume.personalInfo.jobTitle} ?: 'Job Title'">Job Title</div>
+        <div class="sidebar-section" th:if="${resume.personalInfo.email != '' or resume.personalInfo.phone != '' or resume.personalInfo.address != ''}">
+            <div class="sidebar-heading">Contact</div>
+            <div class="contact-item" th:if="${resume.personalInfo.email != ''}"><strong>Email</strong><br/><span th:text="${resume.personalInfo.email}"></span></div>
+            <div class="contact-item" th:if="${resume.personalInfo.phone != ''}"><strong>Phone</strong><br/><span th:text="${resume.personalInfo.phone}"></span></div>
+            <div class="contact-item" th:if="${resume.personalInfo.address != ''}"><strong>Location</strong><br/><span th:text="${resume.personalInfo.address}"></span></div>
+            <div class="contact-item" th:if="${resume.personalInfo.linkedIn != ''}"><strong>LinkedIn</strong><br/><span th:text="${resume.personalInfo.linkedIn}"></span></div>
+            <div class="contact-item" th:if="${resume.personalInfo.website != ''}"><strong>Website</strong><br/><span th:text="${resume.personalInfo.website}"></span></div>
+        </div>
+        <div class="sidebar-section" th:if="${resume.skills != null and !resume.skills.isEmpty()}">
+            <div class="sidebar-heading">Skills</div>
+            <div class="skill-bar-container" th:each="skill : ${resume.skills}">
+                <div class="skill-name" th:text="${skill.name}"></div>
+                <div class="skill-bar"><div class="skill-bar-fill" th:style="'width:' + ${skill.proficiency * 20} + '%'"></div></div>
+            </div>
+        </div>
+    </div>
+    <div class="main-content">
+        <div th:if="${resume.personalInfo.summary != ''}">
+            <div class="main-heading">Professional Summary</div>
+            <p class="summary-text" th:text="${resume.personalInfo.summary}"></p>
+        </div>
+        <div th:if="${resume.workExperiences != null and !resume.workExperiences.isEmpty()}">
+            <div class="main-heading">Experience</div>
+            <div class="exp-item" th:each="exp : ${resume.workExperiences}">
+                <div class="exp-title" th:text="${exp.position}"></div>
+                <div class="exp-company" th:text="${exp.company}"></div>
+                <div class="exp-date"><span th:text="${exp.startDate}"></span> — <span th:text="${exp.current ? 'Present' : exp.endDate}"></span></div>
+                <div class="exp-desc" th:text="${exp.description}"></div>
+            </div>
+        </div>
+        <div th:if="${resume.educations != null and !resume.educations.isEmpty()}">
+            <div class="main-heading">Education</div>
+            <div class="edu-item" th:each="edu : ${resume.educations}">
+                <div class="edu-degree" th:text="${edu.degree + (edu.fieldOfStudy != '' ? ' in ' + edu.fieldOfStudy : '')}"></div>
+                <div class="edu-school" th:text="${edu.institution}"></div>
+                <div class="edu-date"><span th:text="${edu.startDate}"></span> — <span th:text="${edu.endDate}"></span></div>
+                <div class="edu-gpa" th:if="${edu.gpa != ''}" th:text="'GPA: ' + ${edu.gpa}"></div>
+            </div>
+        </div>
+    </div>
+</div>

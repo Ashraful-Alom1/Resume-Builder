@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head><meta charset="UTF-8"/><title>Resume</title>
+<style>
+    @page { size: A4; margin: 0; }
+    body { font-family: Helvetica, Arial, sans-serif; margin: 0; padding: 0; color: #333; font-size: 11px; line-height: 1.5; }
+    .container { display: flex; min-height: 100%; }
+    .sidebar { width: 200px; background-color: #1a1a2e; color: #e0e0e0; padding: 30px 18px; }
+    .main { flex: 1; padding: 30px 26px; }
+    .name { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 3px; }
+    .jtitle { font-size: 10px; color: #8a84ff; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 18px; }
+    .sh { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #8a84ff; margin-bottom: 8px; padding-bottom: 4px; border-bottom: 1.5px solid #8a84ff; margin-top: 16px; }
+    .ci { font-size: 10px; margin-bottom: 5px; color: #c0c0d0; }
+    .ci b { color: #e0e0e0; }
+    .sbn { font-size: 10px; margin-bottom: 2px; color: #e0e0e0; }
+    .sb { height: 3px; background-color: #2a2a4a; border-radius: 2px; margin-bottom: 6px; }
+    .sbf { height: 3px; background-color: #8a84ff; border-radius: 2px; }
+    .mh { font-size: 12px; font-weight: 700; color: #1a1a2e; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 10px; padding-bottom: 4px; border-bottom: 1.5px solid #8a84ff; margin-top: 18px; }
+    .mh:first-child { margin-top: 0; }
+    .st { font-size: 11px; color: #555; line-height: 1.6; }
+    .ei { margin-bottom: 14px; }
+    .et { font-size: 12px; font-weight: 700; color: #1a1a2e; }
+    .ec { font-size: 11px; color: #6c63ff; font-weight: 600; }
+    .ed { font-size: 10px; color: #888; margin-bottom: 3px; }
+    .edesc { font-size: 10px; color: #555; line-height: 1.5; }
+</style></head>
+<body>
+<div class="container">
+    <div class="sidebar">
+        <div class="name" th:text="${resume.personalInfo.fullName} ?: 'Your Name'">Name</div>
+        <div class="jtitle" th:text="${resume.personalInfo.jobTitle} ?: ''"></div>
+        <div th:if="${resume.personalInfo.email != '' or resume.personalInfo.phone != ''}">
+            <div class="sh">Contact</div>
+            <div class="ci" th:if="${resume.personalInfo.email != ''}"><b>Email</b><br/><span th:text="${resume.personalInfo.email}"></span></div>
+            <div class="ci" th:if="${resume.personalInfo.phone != ''}"><b>Phone</b><br/><span th:text="${resume.personalInfo.phone}"></span></div>
+            <div class="ci" th:if="${resume.personalInfo.address != ''}"><b>Location</b><br/><span th:text="${resume.personalInfo.address}"></span></div>
+            <div class="ci" th:if="${resume.personalInfo.linkedIn != ''}"><b>LinkedIn</b><br/><span th:text="${resume.personalInfo.linkedIn}"></span></div>
+            <div class="ci" th:if="${resume.personalInfo.website != ''}"><b>Website</b><br/><span th:text="${resume.personalInfo.website}"></span></div>
+        </div>
+        <div th:if="${resume.skills != null and !resume.skills.isEmpty()}">
+            <div class="sh">Skills</div>
+            <div th:each="skill : ${resume.skills}">
+                <div class="sbn" th:text="${skill.name}"></div>
+                <div class="sb"><div class="sbf" th:style="'width:' + ${skill.proficiency * 20} + '%'"></div></div>
+            </div>
+        </div>
+    </div>
+    <div class="main">
+        <div th:if="${resume.personalInfo.summary != ''}"><div class="mh">Summary</div><div class="st" th:text="${resume.personalInfo.summary}"></div></div>
+        <div th:if="${resume.workExperiences != null and !resume.workExperiences.isEmpty()}">
+            <div class="mh">Experience</div>
+            <div class="ei" th:each="exp : ${resume.workExperiences}">
+                <div class="et" th:text="${exp.position}"></div>
+                <div class="ec" th:text="${exp.company}"></div>
+                <div class="ed"><span th:text="${exp.startDate}"></span> - <span th:text="${exp.current ? 'Present' : exp.endDate}"></span></div>
+                <div class="edesc" th:text="${exp.description}"></div>
+            </div>
+        </div>
+        <div th:if="${resume.educations != null and !resume.educations.isEmpty()}">
+            <div class="mh">Education</div>
+            <div class="ei" th:each="edu : ${resume.educations}">
+                <div class="et" th:text="${edu.degree + (edu.fieldOfStudy != '' ? ' in ' + edu.fieldOfStudy : '')}"></div>
+                <div class="ec" th:text="${edu.institution}"></div>
+                <div class="ed"><span th:text="${edu.startDate}"></span> - <span th:text="${edu.endDate}"></span></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body></html>

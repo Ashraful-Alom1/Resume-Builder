@@ -1,0 +1,77 @@
+<!-- Creative Template - Bold Gradient Header with Timeline -->
+<div class="resume-creative" xmlns:th="http://www.thymeleaf.org">
+    <style>
+        .resume-creative { font-family: 'Helvetica Neue', Arial, sans-serif; color: #333; line-height: 1.6; min-height: 900px; }
+        .resume-creative .hero { background: linear-gradient(135deg, #6c63ff 0%, #3f3d9e 50%, #1a1a2e 100%); color: white; padding: 32px 36px 28px; }
+        .resume-creative .name { font-size: 28px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 4px; }
+        .resume-creative .job-title-text { font-size: 14px; font-weight: 300; opacity: 0.9; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 16px; }
+        .resume-creative .contact-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+        .resume-creative .pill { font-size: 10px; padding: 4px 12px; background: rgba(255,255,255,0.15); border-radius: 20px; color: rgba(255,255,255,0.9); }
+        .resume-creative .body-content { padding: 28px 36px; }
+        .resume-creative .section { margin-bottom: 24px; }
+        .resume-creative .section-heading { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #6c63ff; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+        .resume-creative .section-heading::after { content: ''; flex: 1; height: 2px; background: linear-gradient(90deg, #6c63ff, transparent); }
+        .resume-creative .summary-text { font-size: 12px; color: #555; line-height: 1.8; border-left: 3px solid #6c63ff; padding-left: 14px; }
+        .resume-creative .timeline { position: relative; padding-left: 24px; }
+        .resume-creative .timeline::before { content: ''; position: absolute; left: 4px; top: 4px; bottom: 4px; width: 2px; background: linear-gradient(180deg, #6c63ff, #00d4aa); }
+        .resume-creative .timeline-item { position: relative; margin-bottom: 18px; padding-left: 0; }
+        .resume-creative .timeline-item::before { content: ''; position: absolute; left: -22px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: #6c63ff; border: 2px solid white; box-shadow: 0 0 0 2px #6c63ff; }
+        .resume-creative .exp-title { font-size: 13px; font-weight: 700; color: #1a1a2e; }
+        .resume-creative .exp-company { font-size: 12px; color: #6c63ff; font-weight: 600; }
+        .resume-creative .exp-date { font-size: 10px; color: #999; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+        .resume-creative .exp-desc { font-size: 11px; color: #555; line-height: 1.7; }
+        .resume-creative .edu-item { margin-bottom: 12px; padding-left: 0; position: relative; }
+        .resume-creative .edu-item::before { content: ''; position: absolute; left: -22px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: #00d4aa; border: 2px solid white; box-shadow: 0 0 0 2px #00d4aa; }
+        .resume-creative .edu-degree { font-size: 13px; font-weight: 700; color: #1a1a2e; }
+        .resume-creative .edu-school { font-size: 12px; color: #6c63ff; font-weight: 600; }
+        .resume-creative .edu-date { font-size: 10px; color: #999; text-transform: uppercase; letter-spacing: 1px; }
+        .resume-creative .edu-gpa { font-size: 11px; color: #555; }
+        .resume-creative .skills-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+        .resume-creative .skill-chip { font-size: 11px; padding: 6px 14px; background: linear-gradient(135deg, rgba(108,99,255,0.1), rgba(0,212,170,0.1)); border: 1px solid rgba(108,99,255,0.2); border-radius: 20px; color: #4a4a6a; font-weight: 500; }
+    </style>
+    <div class="hero">
+        <div class="name" th:text="${resume.personalInfo.fullName} ?: 'Your Name'">Your Name</div>
+        <div class="job-title-text" th:text="${resume.personalInfo.jobTitle} ?: 'Creative Professional'">Creative Professional</div>
+        <div class="contact-pills">
+            <span class="pill" th:if="${resume.personalInfo.email != ''}" th:text="${resume.personalInfo.email}"></span>
+            <span class="pill" th:if="${resume.personalInfo.phone != ''}" th:text="${resume.personalInfo.phone}"></span>
+            <span class="pill" th:if="${resume.personalInfo.address != ''}" th:text="${resume.personalInfo.address}"></span>
+            <span class="pill" th:if="${resume.personalInfo.linkedIn != ''}" th:text="${resume.personalInfo.linkedIn}"></span>
+            <span class="pill" th:if="${resume.personalInfo.website != ''}" th:text="${resume.personalInfo.website}"></span>
+        </div>
+    </div>
+    <div class="body-content">
+        <div class="section" th:if="${resume.personalInfo.summary != ''}">
+            <div class="section-heading">About Me</div>
+            <p class="summary-text" th:text="${resume.personalInfo.summary}"></p>
+        </div>
+        <div class="section" th:if="${resume.workExperiences != null and !resume.workExperiences.isEmpty()}">
+            <div class="section-heading">Experience</div>
+            <div class="timeline">
+                <div class="timeline-item" th:each="exp : ${resume.workExperiences}">
+                    <div class="exp-title" th:text="${exp.position}"></div>
+                    <div class="exp-company" th:text="${exp.company}"></div>
+                    <div class="exp-date"><span th:text="${exp.startDate}"></span> — <span th:text="${exp.current ? 'Present' : exp.endDate}"></span></div>
+                    <div class="exp-desc" th:text="${exp.description}"></div>
+                </div>
+            </div>
+        </div>
+        <div class="section" th:if="${resume.educations != null and !resume.educations.isEmpty()}">
+            <div class="section-heading">Education</div>
+            <div class="timeline">
+                <div class="edu-item" th:each="edu : ${resume.educations}">
+                    <div class="edu-degree" th:text="${edu.degree + (edu.fieldOfStudy != '' ? ' in ' + edu.fieldOfStudy : '')}"></div>
+                    <div class="edu-school" th:text="${edu.institution}"></div>
+                    <div class="edu-date"><span th:text="${edu.startDate}"></span> — <span th:text="${edu.endDate}"></span></div>
+                    <div class="edu-gpa" th:if="${edu.gpa != ''}" th:text="'GPA: ' + ${edu.gpa}"></div>
+                </div>
+            </div>
+        </div>
+        <div class="section" th:if="${resume.skills != null and !resume.skills.isEmpty()}">
+            <div class="section-heading">Skills</div>
+            <div class="skills-grid">
+                <span class="skill-chip" th:each="skill : ${resume.skills}" th:text="${skill.name}"></span>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,72 @@
+<!-- Classic Template - Traditional Single Column -->
+<div class="resume-classic" xmlns:th="http://www.thymeleaf.org">
+    <style>
+        .resume-classic { font-family: 'Georgia', 'Times New Roman', serif; padding: 36px 40px; color: #2c2c2c; line-height: 1.6; min-height: 900px; }
+        .resume-classic .header { text-align: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 3px double #2c2c2c; }
+        .resume-classic .name { font-size: 26px; font-weight: 700; color: #1a1a1a; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; }
+        .resume-classic .job-title-text { font-size: 14px; color: #666; font-style: italic; margin-bottom: 10px; }
+        .resume-classic .contact-row { display: flex; justify-content: center; flex-wrap: wrap; gap: 16px; font-size: 11px; color: #555; }
+        .resume-classic .contact-row span { display: flex; align-items: center; gap: 4px; }
+        .resume-classic .divider { border: none; border-top: 1px solid #ccc; margin: 4px 0; }
+        .resume-classic .section { margin-bottom: 20px; }
+        .resume-classic .section-heading { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #1a1a1a; border-bottom: 2px solid #1a1a1a; padding-bottom: 4px; margin-bottom: 12px; }
+        .resume-classic .summary-text { font-size: 12px; color: #444; line-height: 1.8; text-align: justify; }
+        .resume-classic .exp-item { margin-bottom: 14px; }
+        .resume-classic .exp-top { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; }
+        .resume-classic .exp-title { font-size: 13px; font-weight: 700; color: #1a1a1a; }
+        .resume-classic .exp-date { font-size: 11px; color: #777; font-style: italic; }
+        .resume-classic .exp-company { font-size: 12px; color: #444; font-style: italic; margin-bottom: 4px; }
+        .resume-classic .exp-desc { font-size: 11px; color: #444; line-height: 1.7; }
+        .resume-classic .edu-item { margin-bottom: 10px; }
+        .resume-classic .edu-top { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; }
+        .resume-classic .edu-degree { font-size: 13px; font-weight: 700; color: #1a1a1a; }
+        .resume-classic .edu-school { font-size: 12px; color: #444; font-style: italic; }
+        .resume-classic .edu-date { font-size: 11px; color: #777; font-style: italic; }
+        .resume-classic .edu-gpa { font-size: 11px; color: #555; }
+        .resume-classic .skills-list { display: flex; flex-wrap: wrap; gap: 8px; }
+        .resume-classic .skill-tag { font-size: 11px; padding: 4px 12px; border: 1px solid #aaa; border-radius: 20px; color: #333; background: #f8f8f8; }
+    </style>
+    <div class="header">
+        <div class="name" th:text="${resume.personalInfo.fullName} ?: 'Your Name'">Your Name</div>
+        <div class="job-title-text" th:text="${resume.personalInfo.jobTitle} ?: 'Professional Title'">Professional Title</div>
+        <div class="contact-row">
+            <span th:if="${resume.personalInfo.email != ''}" th:text="${resume.personalInfo.email}"></span>
+            <span th:if="${resume.personalInfo.phone != ''}" th:text="'• ' + ${resume.personalInfo.phone}"></span>
+            <span th:if="${resume.personalInfo.address != ''}" th:text="'• ' + ${resume.personalInfo.address}"></span>
+            <span th:if="${resume.personalInfo.linkedIn != ''}" th:text="'• ' + ${resume.personalInfo.linkedIn}"></span>
+            <span th:if="${resume.personalInfo.website != ''}" th:text="'• ' + ${resume.personalInfo.website}"></span>
+        </div>
+    </div>
+    <div class="section" th:if="${resume.personalInfo.summary != ''}">
+        <div class="section-heading">Professional Summary</div>
+        <p class="summary-text" th:text="${resume.personalInfo.summary}"></p>
+    </div>
+    <div class="section" th:if="${resume.workExperiences != null and !resume.workExperiences.isEmpty()}">
+        <div class="section-heading">Professional Experience</div>
+        <div class="exp-item" th:each="exp : ${resume.workExperiences}">
+            <div class="exp-top">
+                <span class="exp-title" th:text="${exp.position}"></span>
+                <span class="exp-date"><span th:text="${exp.startDate}"></span> — <span th:text="${exp.current ? 'Present' : exp.endDate}"></span></span>
+            </div>
+            <div class="exp-company" th:text="${exp.company}"></div>
+            <div class="exp-desc" th:text="${exp.description}"></div>
+        </div>
+    </div>
+    <div class="section" th:if="${resume.educations != null and !resume.educations.isEmpty()}">
+        <div class="section-heading">Education</div>
+        <div class="edu-item" th:each="edu : ${resume.educations}">
+            <div class="edu-top">
+                <span class="edu-degree" th:text="${edu.degree + (edu.fieldOfStudy != '' ? ' — ' + edu.fieldOfStudy : '')}"></span>
+                <span class="edu-date"><span th:text="${edu.startDate}"></span> — <span th:text="${edu.endDate}"></span></span>
+            </div>
+            <div class="edu-school" th:text="${edu.institution}"></div>
+            <div class="edu-gpa" th:if="${edu.gpa != ''}" th:text="'GPA: ' + ${edu.gpa}"></div>
+        </div>
+    </div>
+    <div class="section" th:if="${resume.skills != null and !resume.skills.isEmpty()}">
+        <div class="section-heading">Skills</div>
+        <div class="skills-list">
+            <span class="skill-tag" th:each="skill : ${resume.skills}" th:text="${skill.name}"></span>
+        </div>
+    </div>
+</div>
