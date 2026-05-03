@@ -1,74 +1,155 @@
-<!-- Modern Template - Two Column with Sidebar -->
+<!-- Modern Template - Matching professional ATS-friendly resume structure -->
 <div class="resume-modern" xmlns:th="http://www.thymeleaf.org">
     <style>
-        .resume-modern { font-family: 'Helvetica Neue', Arial, sans-serif; display: flex; min-height: 900px; color: #333; line-height: 1.6; }
-        .resume-modern .sidebar { width: 220px; background: #1a1a2e; color: #e0e0e0; padding: 32px 20px; flex-shrink: 0; }
-        .resume-modern .main-content { flex: 1; padding: 32px 28px; }
-        .resume-modern .name { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 4px; word-wrap: break-word; }
-        .resume-modern .job-title-text { font-size: 12px; color: #6c63ff; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 20px; }
-        .resume-modern .sidebar-section { margin-bottom: 22px; }
-        .resume-modern .sidebar-heading { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #6c63ff; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 2px solid #6c63ff; }
-        .resume-modern .contact-item { font-size: 11px; margin-bottom: 6px; color: #c0c0d0; word-wrap: break-word; }
-        .resume-modern .contact-item strong { color: #e0e0e0; }
-        .resume-modern .skill-bar-container { margin-bottom: 8px; }
-        .resume-modern .skill-name { font-size: 11px; margin-bottom: 3px; color: #e0e0e0; }
-        .resume-modern .skill-bar { height: 4px; background: #2a2a4a; border-radius: 2px; overflow: hidden; }
-        .resume-modern .skill-bar-fill { height: 100%; background: linear-gradient(90deg, #6c63ff, #00d4aa); border-radius: 2px; }
-        .resume-modern .main-heading { font-size: 14px; font-weight: 700; color: #1a1a2e; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; padding-bottom: 6px; border-bottom: 2px solid #6c63ff; margin-top: 20px; }
-        .resume-modern .main-heading:first-child { margin-top: 0; }
-        .resume-modern .summary-text { font-size: 12px; color: #555; line-height: 1.7; }
-        .resume-modern .exp-item { margin-bottom: 16px; }
-        .resume-modern .exp-title { font-size: 13px; font-weight: 700; color: #1a1a2e; }
-        .resume-modern .exp-company { font-size: 12px; color: #6c63ff; font-weight: 600; }
-        .resume-modern .exp-date { font-size: 11px; color: #888; margin-bottom: 4px; }
-        .resume-modern .exp-desc { font-size: 11px; color: #555; line-height: 1.6; }
-        .resume-modern .edu-item { margin-bottom: 12px; }
-        .resume-modern .edu-degree { font-size: 13px; font-weight: 700; color: #1a1a2e; }
-        .resume-modern .edu-school { font-size: 12px; color: #6c63ff; font-weight: 600; }
-        .resume-modern .edu-date { font-size: 11px; color: #888; }
-        .resume-modern .edu-gpa { font-size: 11px; color: #555; }
+        .resume-modern { font-family: 'Times New Roman', Georgia, serif; padding: 28px 32px; color: #111; line-height: 1.45; min-height: 900px; font-size: 12px; }
+        .resume-modern .rm-header { text-align: center; margin-bottom: 8px; }
+        .resume-modern .rm-name { font-size: 22px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 6px; font-variant: small-caps; }
+        .resume-modern .rm-contact { font-size: 11px; color: #333; display: flex; justify-content: center; flex-wrap: wrap; gap: 14px; }
+        .resume-modern .rm-contact span { display: inline-flex; align-items: center; gap: 3px; }
+        .resume-modern .rm-section { margin-bottom: 10px; }
+        .resume-modern .rm-section-title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; border-bottom: 1.5px solid #111; padding-bottom: 2px; margin-bottom: 6px; margin-top: 8px; }
+        .resume-modern .rm-edu-row { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; }
+        .resume-modern .rm-edu-inst { font-size: 12.5px; font-weight: 700; }
+        .resume-modern .rm-edu-date { font-size: 11px; font-style: italic; color: #333; text-align: right; }
+        .resume-modern .rm-edu-degree { font-size: 11.5px; font-style: italic; color: #333; }
+        .resume-modern .rm-edu-loc { font-size: 11px; color: #444; text-align: right; }
+        .resume-modern .rm-coursework { display: flex; flex-wrap: wrap; gap: 0; padding-left: 16px; }
+        .resume-modern .rm-coursework-col { width: 33.33%; font-size: 11px; padding: 1px 0; }
+        .resume-modern .rm-coursework-col::before { content: '•'; margin-right: 6px; }
+        .resume-modern .rm-skills-row { font-size: 11.5px; margin-bottom: 2px; line-height: 1.5; }
+        .resume-modern .rm-skills-row strong { font-weight: 700; }
+        .resume-modern .rm-proj-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; margin-bottom: 1px; }
+        .resume-modern .rm-proj-title { font-size: 12.5px; font-weight: 700; }
+        .resume-modern .rm-proj-title a, .resume-modern .rm-proj-title span.link-icon { font-size: 10px; color: #555; text-decoration: none; margin-left: 4px; }
+        .resume-modern .rm-proj-tech { font-size: 11px; color: #444; }
+        .resume-modern .rm-proj-year { font-size: 12px; font-weight: 700; }
+        .resume-modern .rm-bullet-list { margin: 2px 0 8px 16px; padding-left: 8px; }
+        .resume-modern .rm-bullet-list li { font-size: 11px; color: #222; margin-bottom: 2px; line-height: 1.45; list-style-type: disc; }
+        .resume-modern .rm-exp-title { font-size: 12px; font-weight: 700; font-style: italic; text-decoration: underline; margin-bottom: 2px; }
+        .resume-modern .rm-ach-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; }
+        .resume-modern .rm-ach-title { font-size: 12.5px; font-weight: 700; }
+        .resume-modern .rm-ach-date { font-size: 11px; color: #333; }
+        .resume-modern .rm-ach-role { font-size: 11px; font-style: italic; color: #444; }
+        .resume-modern .rm-ach-loc { font-size: 11px; color: #444; text-align: right; }
+        .resume-modern .rm-cert-list { padding-left: 24px; margin: 2px 0 0; }
+        .resume-modern .rm-cert-list li { font-size: 11px; margin-bottom: 1px; list-style-type: disc; }
+        .resume-modern .rm-addinfo-list { padding-left: 24px; margin: 2px 0 0; }
+        .resume-modern .rm-addinfo-list li { font-size: 11px; margin-bottom: 1px; list-style-type: disc; }
+        .resume-modern .rm-proj-item { margin-bottom: 8px; }
+        .resume-modern .rm-ach-item { margin-bottom: 8px; }
+        .resume-modern .rm-exp-item { margin-bottom: 8px; }
     </style>
-    <div class="sidebar">
-        <div class="name" th:text="${resume.personalInfo.fullName} ?: 'Your Name'">Your Name</div>
-        <div class="job-title-text" th:text="${resume.personalInfo.jobTitle} ?: 'Job Title'">Job Title</div>
-        <div class="sidebar-section" th:if="${resume.personalInfo.email != '' or resume.personalInfo.phone != '' or resume.personalInfo.address != ''}">
-            <div class="sidebar-heading">Contact</div>
-            <div class="contact-item" th:if="${resume.personalInfo.email != ''}"><strong>Email</strong><br/><span th:text="${resume.personalInfo.email}"></span></div>
-            <div class="contact-item" th:if="${resume.personalInfo.phone != ''}"><strong>Phone</strong><br/><span th:text="${resume.personalInfo.phone}"></span></div>
-            <div class="contact-item" th:if="${resume.personalInfo.address != ''}"><strong>Location</strong><br/><span th:text="${resume.personalInfo.address}"></span></div>
-            <div class="contact-item" th:if="${resume.personalInfo.linkedIn != ''}"><strong>LinkedIn</strong><br/><span th:text="${resume.personalInfo.linkedIn}"></span></div>
-            <div class="contact-item" th:if="${resume.personalInfo.website != ''}"><strong>Website</strong><br/><span th:text="${resume.personalInfo.website}"></span></div>
+
+    <!-- HEADER -->
+    <div class="rm-header">
+        <div class="rm-name" th:text="${resume.personalInfo.fullName} ?: 'Your Name'">Your Name</div>
+        <div class="rm-contact">
+            <span th:if="${resume.personalInfo.phone != ''}">&#9742; <span th:text="${resume.personalInfo.phone}"></span></span>
+            <span th:if="${resume.personalInfo.email != ''}">&#9993; <span th:text="${resume.personalInfo.email}"></span></span>
+            <span th:if="${resume.personalInfo.linkedIn != ''}">&#128279; <span th:text="${resume.personalInfo.linkedIn}"></span></span>
+            <span th:if="${resume.personalInfo.website != ''}">&#127760; <span th:text="${resume.personalInfo.website}"></span></span>
         </div>
-        <div class="sidebar-section" th:if="${resume.skills != null and !resume.skills.isEmpty()}">
-            <div class="sidebar-heading">Skills</div>
-            <div class="skill-bar-container" th:each="skill : ${resume.skills}">
-                <div class="skill-name" th:text="${skill.name}"></div>
-                <div class="skill-bar"><div class="skill-bar-fill" th:style="'width:' + ${skill.proficiency * 20} + '%'"></div></div>
+    </div>
+
+    <!-- EDUCATION -->
+    <div class="rm-section" th:if="${resume.educations != null and !resume.educations.isEmpty()}">
+        <div class="rm-section-title">Education</div>
+        <div th:each="edu : ${resume.educations}" style="margin-bottom:6px">
+            <div class="rm-edu-row">
+                <span class="rm-edu-inst" th:text="${edu.institution}"></span>
+                <span class="rm-edu-date" th:text="'Expected ' + ${edu.startDate} + ' – ' + ${edu.endDate}"></span>
+            </div>
+            <div class="rm-edu-row">
+                <span class="rm-edu-degree" th:text="${edu.degree + (edu.fieldOfStudy != '' ? ' - ' + edu.fieldOfStudy : '')}"></span>
+                <span class="rm-edu-loc" th:if="${edu.gpa != ''}" th:text="${edu.gpa}"></span>
             </div>
         </div>
     </div>
-    <div class="main-content">
-        <div th:if="${resume.personalInfo.summary != ''}">
-            <div class="main-heading">Professional Summary</div>
-            <p class="summary-text" th:text="${resume.personalInfo.summary}"></p>
+
+    <!-- RELEVANT COURSEWORK -->
+    <div class="rm-section" th:if="${resume.relevantCoursework != null and resume.relevantCoursework != ''}">
+        <div class="rm-section-title">Relevant Coursework</div>
+        <div class="rm-coursework">
+            <span class="rm-coursework-col" th:each="course : ${resume.relevantCoursework.split(',')}" th:text="${course.trim()}"></span>
         </div>
-        <div th:if="${resume.workExperiences != null and !resume.workExperiences.isEmpty()}">
-            <div class="main-heading">Experience</div>
-            <div class="exp-item" th:each="exp : ${resume.workExperiences}">
-                <div class="exp-title" th:text="${exp.position}"></div>
-                <div class="exp-company" th:text="${exp.company}"></div>
-                <div class="exp-date"><span th:text="${exp.startDate}"></span> — <span th:text="${exp.current ? 'Present' : exp.endDate}"></span></div>
-                <div class="exp-desc" th:text="${exp.description}"></div>
+    </div>
+
+    <!-- TECHNICAL SKILLS -->
+    <div class="rm-section" th:if="${resume.technicalSkills != null}">
+        <div class="rm-section-title">Technical Skills</div>
+        <div th:with="ts=${resume.technicalSkills}">
+            <div class="rm-skills-row" th:if="${ts.programmingLanguages != ''}"><strong>Programming Languages:</strong> <span th:text="${ts.programmingLanguages}"></span></div>
+            <div class="rm-skills-row" th:if="${ts.frameworksLibraries != ''}"><strong>Frameworks/Libraries:</strong> <span th:text="${ts.frameworksLibraries}"></span></div>
+            <div class="rm-skills-row" th:if="${ts.databases != ''}"><strong>Databases:</strong> <span th:text="${ts.databases}"></span></div>
+            <div class="rm-skills-row" th:if="${ts.cloudDevOps != ''}"><strong>Cloud/DevOps:</strong> <span th:text="${ts.cloudDevOps}"></span></div>
+            <div class="rm-skills-row" th:if="${ts.tools != ''}"><strong>Tools:</strong> <span th:text="${ts.tools}"></span></div>
+            <div class="rm-skills-row" th:if="${ts.concepts != ''}"><strong>Concepts:</strong> <span th:text="${ts.concepts}"></span></div>
+        </div>
+    </div>
+
+    <!-- PROJECTS -->
+    <div class="rm-section" th:if="${resume.projects != null and !resume.projects.isEmpty()}">
+        <div class="rm-section-title">Projects</div>
+        <div class="rm-proj-item" th:each="proj : ${resume.projects}">
+            <div class="rm-proj-header">
+                <div>
+                    <span class="rm-proj-title" th:text="${proj.name}"></span>
+                    <span class="link-icon" th:if="${proj.link != ''}">&#8599;</span>
+                    <span class="rm-proj-tech" th:if="${proj.techStack != ''}" th:text="' | ' + ${proj.techStack}"></span>
+                </div>
+                <span class="rm-proj-year" th:text="${proj.year}"></span>
             </div>
+            <ul class="rm-bullet-list" th:if="${proj.description != ''}">
+                <li th:each="line : ${proj.description.split('\n')}" th:if="${!line.isBlank()}" th:text="${line.trim()}"></li>
+            </ul>
         </div>
-        <div th:if="${resume.educations != null and !resume.educations.isEmpty()}">
-            <div class="main-heading">Education</div>
-            <div class="edu-item" th:each="edu : ${resume.educations}">
-                <div class="edu-degree" th:text="${edu.degree + (edu.fieldOfStudy != '' ? ' in ' + edu.fieldOfStudy : '')}"></div>
-                <div class="edu-school" th:text="${edu.institution}"></div>
-                <div class="edu-date"><span th:text="${edu.startDate}"></span> — <span th:text="${edu.endDate}"></span></div>
-                <div class="edu-gpa" th:if="${edu.gpa != ''}" th:text="'GPA: ' + ${edu.gpa}"></div>
+    </div>
+
+    <!-- EXPERIENCE -->
+    <div class="rm-section" th:if="${resume.workExperiences != null and !resume.workExperiences.isEmpty()}">
+        <div class="rm-section-title">Experience</div>
+        <div class="rm-exp-item" th:each="exp : ${resume.workExperiences}">
+            <div class="rm-edu-row">
+                <span class="rm-exp-title" th:text="${exp.position + (exp.company != '' ? ' | ' + exp.company : '')}"></span>
+                <span class="rm-edu-date"><span th:text="${exp.startDate}"></span> — <span th:text="${exp.current ? 'Present' : exp.endDate}"></span></span>
             </div>
+            <ul class="rm-bullet-list" th:if="${exp.description != ''}">
+                <li th:each="line : ${exp.description.split('\n')}" th:if="${!line.isBlank()}" th:text="${line.trim()}"></li>
+            </ul>
         </div>
+    </div>
+
+    <!-- ACHIEVEMENTS -->
+    <div class="rm-section" th:if="${resume.achievements != null and !resume.achievements.isEmpty()}">
+        <div class="rm-section-title">Achievement</div>
+        <div class="rm-ach-item" th:each="ach : ${resume.achievements}">
+            <div class="rm-ach-header">
+                <div><span class="rm-ach-title" th:text="${ach.title}"></span><span class="link-icon" th:if="${ach.link != ''}"> &#8599;</span></div>
+                <span class="rm-ach-date" th:text="${ach.date}"></span>
+            </div>
+            <div class="rm-edu-row" th:if="${ach.role != '' or ach.location != ''}">
+                <span class="rm-ach-role" th:text="${ach.role}"></span>
+                <span class="rm-ach-loc" th:text="${ach.location}"></span>
+            </div>
+            <ul class="rm-bullet-list" th:if="${ach.description != ''}">
+                <li th:each="line : ${ach.description.split('\n')}" th:if="${!line.isBlank()}" th:text="${line.trim()}"></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- CERTIFICATIONS -->
+    <div class="rm-section" th:if="${resume.certifications != null and !resume.certifications.isEmpty()}">
+        <div class="rm-section-title">Certifications</div>
+        <ul class="rm-cert-list">
+            <li th:each="cert : ${resume.certifications}" th:if="${!cert.isBlank()}" th:text="${cert}"></li>
+        </ul>
+    </div>
+
+    <!-- ADDITIONAL INFORMATION -->
+    <div class="rm-section" th:if="${resume.additionalInfo != null and !resume.additionalInfo.isEmpty()}">
+        <div class="rm-section-title">Additional Information</div>
+        <ul class="rm-addinfo-list">
+            <li th:each="info : ${resume.additionalInfo}" th:if="${!info.isBlank()}" th:text="${info}"></li>
+        </ul>
     </div>
 </div>

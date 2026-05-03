@@ -423,6 +423,37 @@ body {
 
 .proficiency-dot:hover { border-color: var(--accent-primary); }
 
+/* ---- Simple Item (Certifications, Additional Info) ---- */
+.simple-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+    animation: slideIn 0.3s ease;
+}
+
+.simple-item .form-input {
+    flex: 1;
+    padding: 10px 14px;
+    background: rgba(13, 27, 42, 0.5);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-size: 13px;
+    font-family: inherit;
+    outline: none;
+    transition: var(--transition);
+}
+
+.simple-item .form-input:focus {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.15);
+}
+
+.simple-item .form-input::placeholder {
+    color: var(--text-muted);
+}
+
 /* Current job checkbox */
 .check-group {
     display: flex;

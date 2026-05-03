@@ -1,0 +1,22 @@
+package com.resumebuilder.model;
+
+public class Project {
+    private String name = "";
+    private String techStack = "";
+    private String year = "";
+    private String link = "";
+    private String description = "";
+
+    public Project() {}
+
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+    public String getTechStack() { return techStack; }
+    public void setTechStack(String techStack) { this.techStack = techStack; }
+    public String getYear() { return year; }
+    public void setYear(String year) { this.year = year; }
+    public String getLink() { return link; }
+    public void setLink(String link) { this.link = link; }
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
+}
