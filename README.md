@@ -45,12 +45,6 @@ mvn spring-boot:run
 
 Open your browser at **http://localhost:8080**
 
-### Live Demo (Requires Deployment)
-🚀 **[View Live Demo](https://resume-builder-alom.onrender.com)**  
-*(Note: This link will be active once you deploy the project using the button below)*
-
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/Ashraful-Alom1/Resume-Builder)
-
 ### Build JAR
 ```bash
 mvn clean package -DskipTests
