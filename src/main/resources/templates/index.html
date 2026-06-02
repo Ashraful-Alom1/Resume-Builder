@@ -13,6 +13,28 @@
 </head>
 <body>
 
+<!-- Login Modal Overlay -->
+<div class="login-overlay" id="loginOverlay">
+    <div class="login-modal">
+        <div class="login-header">
+            <div class="brand-icon"><i class="bi bi-file-earmark-person-fill"></i></div>
+            <h2>Welcome to ResumeForge</h2>
+            <p>Please enter your details to start building your professional resume.</p>
+        </div>
+        <form id="loginForm">
+            <div class="form-floating-custom mb-3">
+                <input type="text" class="form-input" id="loginName" placeholder=" " required/>
+                <label for="loginName">Your Name</label>
+            </div>
+            <div class="form-floating-custom mb-4">
+                <input type="email" class="form-input" id="loginEmail" placeholder=" " required/>
+                <label for="loginEmail">Email Address</label>
+            </div>
+            <button type="submit" class="btn-login w-100">Start Building <i class="bi bi-arrow-right"></i></button>
+        </form>
+    </div>
+</div>
+
 <!-- Top Navbar -->
 <nav class="navbar-custom" id="mainNavbar">
     <div class="navbar-inner">
@@ -277,6 +299,27 @@
                     </button>
                     <button class="template-btn" data-template="creative" id="tplCreative">
                         <i class="bi bi-palette-fill"></i> Creative
+                    </button>
+                    <button class="template-btn" data-template="minimalist" id="tplMinimalist">
+                        <i class="bi bi-dash-square"></i> Minimalist
+                    </button>
+                    <button class="template-btn" data-template="professional" id="tplProfessional">
+                        <i class="bi bi-briefcase"></i> Professional
+                    </button>
+                    <button class="template-btn" data-template="executive" id="tplExecutive">
+                        <i class="bi bi-building"></i> Executive
+                    </button>
+                    <button class="template-btn" data-template="tech" id="tplTech">
+                        <i class="bi bi-laptop"></i> Tech
+                    </button>
+                    <button class="template-btn" data-template="elegant" id="tplElegant">
+                        <i class="bi bi-gem"></i> Elegant
+                    </button>
+                    <button class="template-btn" data-template="startup" id="tplStartup">
+                        <i class="bi bi-rocket"></i> Startup
+                    </button>
+                    <button class="template-btn" data-template="academic" id="tplAcademic">
+                        <i class="bi bi-mortarboard"></i> Academic
                     </button>
                 </div>
             </div>

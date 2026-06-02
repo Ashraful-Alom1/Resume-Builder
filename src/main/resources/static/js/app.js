@@ -430,9 +430,39 @@
     }
 
     // ══════════════════════════════════════════
+    //  LOGIN LOGIC
+    // ══════════════════════════════════════════
+    function checkLogin() {
+        const user = localStorage.getItem('resumeforge_user');
+        if (!user) {
+            $('#loginOverlay').classList.add('show');
+            $('#loginForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = $('#loginName').value.trim();
+                const email = $('#loginEmail').value.trim();
+                if (name && email) {
+                    localStorage.setItem('resumeforge_user', JSON.stringify({ name, email }));
+                    $('#loginOverlay').classList.remove('show');
+                    // Pre-fill personal info if empty
+                    if (!$('#fullName').value) {
+                        $('#fullName').value = name;
+                        triggerPreview();
+                    }
+                    if (!$('#email').value) {
+                        $('#email').value = email;
+                        triggerPreview();
+                    }
+                }
+            });
+        }
+    }
+
+    // ══════════════════════════════════════════
     //  INIT
     // ══════════════════════════════════════════
     function init() {
+        checkLogin();
+
         // Personal info + static fields
         $$('#sectionPersonal .form-input').forEach(el => el.addEventListener('input', triggerPreview));
         $('#relevantCoursework').addEventListener('input', triggerPreview);
