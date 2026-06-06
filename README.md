@@ -51,6 +51,23 @@ mvn clean package -DskipTests
 java -jar target/resume-builder-1.0.0.jar
 ```
 
+## 🌐 Online Deployment
+
+This project is pre-configured for easy online deployment.
+
+### Deploy to Render (Recommended)
+1. Commit your changes and push them to your GitHub repository.
+2. Sign in to [Render](https://render.com/).
+3. Click **New +** and select **Blueprint**.
+4. Connect your GitHub repository.
+5. Render will automatically detect the `render.yaml` configuration, build the Docker container, and deploy the service online.
+
+### Deploy to Railway
+1. Sign in to [Railway](https://railway.app/).
+2. Click **New Project** -> **Deploy from GitHub repo**.
+3. Choose your repository.
+4. Railway will automatically detect the `Dockerfile` and deploy the application. It will automatically bind the dynamic port using the `${PORT}` variable configured in `application.properties`.
+
 ## 📸 Screenshots
 
 ### Modern Template
