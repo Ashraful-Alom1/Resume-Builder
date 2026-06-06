@@ -1,0 +1,144 @@
+<!-- Executive Template -->
+<div class="resume-executive" xmlns:th="http://www.thymeleaf.org">
+    <style>
+        .resume-executive { font-family: Garamond, 'Times New Roman', serif; padding: 32px; color: #222; line-height: 1.5; min-height: 900px; font-size: 13px; background: #fff; }
+        .resume-executive .r-header { text-align: center; margin-bottom: 12px; }
+        .resume-executive .r-name { font-size: 28px; font-weight: bold; text-transform: uppercase; margin-bottom: 6px; color: #222; }
+        .resume-executive .r-contact { font-size: 11.5px; color: #8a795d; display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; }
+        .resume-executive .r-contact span { display: inline-flex; align-items: center; gap: 4px; }
+        .resume-executive .r-section { margin-bottom: 12px; }
+        .resume-executive .r-section-title { font-size: 14px; font-weight: bold; text-transform: uppercase; border-bottom: 1px solid #8a795d; padding-bottom: 4px; margin-bottom: 8px; margin-top: 10px; color: #8a795d; }
+        .resume-executive .r-row { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; }
+        .resume-executive .r-inst { font-size: 13px; font-weight: bold; }
+        .resume-executive .r-date { font-size: 11.5px; color: #8a795d; text-align: right; }
+        .resume-executive .r-degree { font-size: 12px; font-style: italic; color: #222; }
+        .resume-executive .r-loc { font-size: 11.5px; color: #8a795d; text-align: right; }
+        .resume-executive .r-coursework { display: flex; flex-wrap: wrap; gap: 0; padding-left: 16px; }
+        .resume-executive .r-coursework-col { width: 33.33%; font-size: 11.5px; padding: 2px 0; }
+        .resume-executive .r-coursework-col::before { content: '•'; margin-right: 6px; color: #8a795d; }
+        .resume-executive .r-skills-row { font-size: 12px; margin-bottom: 4px; line-height: 1.5; }
+        .resume-executive .r-skills-row strong { font-weight: bold; color: #8a795d; }
+        .resume-executive .r-proj-title { font-size: 13px; font-weight: bold; }
+        .resume-executive .r-proj-tech { font-size: 11.5px; color: #8a795d; }
+        .resume-executive .r-bullet-list { margin: 4px 0 8px 16px; padding-left: 8px; }
+        .resume-executive .r-bullet-list li { font-size: 11.5px; margin-bottom: 3px; list-style-type: disc; color: #222; }
+        .resume-executive .r-exp-title { font-size: 13px; font-weight: bold; }
+        .resume-executive .link-icon { font-size: 10px; color: #8a795d; text-decoration: none; margin-left: 4px; }
+        .resume-executive .r-item { margin-bottom: 10px; }
+        .resume-executive .r-cert-list, .resume-executive .r-addinfo-list { padding-left: 24px; margin: 4px 0 0; }
+        .resume-executive .r-cert-list li, .resume-executive .r-addinfo-list li { font-size: 11.5px; margin-bottom: 2px; list-style-type: disc; }
+    </style>
+
+    <!-- HEADER -->
+    <div class="r-header">
+        <div class="r-name" th:text="${resume.personalInfo.fullName} ?: 'Your Name'">Your Name</div>
+        <div class="r-contact">
+            <span th:if="${resume.personalInfo.phone != ''}">&#9742; <span th:text="${resume.personalInfo.phone}"></span></span>
+            <span th:if="${resume.personalInfo.email != ''}">&#9993; <span th:text="${resume.personalInfo.email}"></span></span>
+            <span th:if="${resume.personalInfo.linkedIn != ''}">&#128279; <span th:text="${resume.personalInfo.linkedIn}"></span></span>
+            <span th:if="${resume.personalInfo.website != ''}">&#127760; <span th:text="${resume.personalInfo.website}"></span></span>
+        </div>
+    </div>
+
+    <!-- EDUCATION -->
+    <div class="r-section" th:if="${resume.educations != null and !resume.educations.isEmpty()}">
+        <div class="r-section-title">Education</div>
+        <div class="r-item" th:each="edu : ${resume.educations}">
+            <div class="r-row">
+                <span class="r-inst" th:text="${edu.institution}"></span>
+                <span class="r-date" th:text="'Expected ' + ${edu.startDate} + ' – ' + ${edu.endDate}"></span>
+            </div>
+            <div class="r-row">
+                <span class="r-degree" th:text="${edu.degree + (edu.fieldOfStudy != '' ? ' - ' + edu.fieldOfStudy : '')}"></span>
+                <span class="r-loc" th:if="${edu.gpa != ''}" th:text="${edu.gpa}"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- RELEVANT COURSEWORK -->
+    <div class="r-section" th:if="${resume.relevantCoursework != null and resume.relevantCoursework != ''}">
+        <div class="r-section-title">Relevant Coursework</div>
+        <div class="r-coursework">
+            <span class="r-coursework-col" th:each="course : ${resume.relevantCoursework.split(',')}" th:text="${course.trim()}"></span>
+        </div>
+    </div>
+
+    <!-- TECHNICAL SKILLS -->
+    <div class="r-section" th:if="${resume.technicalSkills != null}">
+        <div class="r-section-title">Technical Skills</div>
+        <div th:with="ts=${resume.technicalSkills}">
+            <div class="r-skills-row" th:if="${ts.programmingLanguages != ''}"><strong>Programming Languages:</strong> <span th:text="${ts.programmingLanguages}"></span></div>
+            <div class="r-skills-row" th:if="${ts.frameworksLibraries != ''}"><strong>Frameworks/Libraries:</strong> <span th:text="${ts.frameworksLibraries}"></span></div>
+            <div class="r-skills-row" th:if="${ts.databases != ''}"><strong>Databases:</strong> <span th:text="${ts.databases}"></span></div>
+            <div class="r-skills-row" th:if="${ts.cloudDevOps != ''}"><strong>Cloud/DevOps:</strong> <span th:text="${ts.cloudDevOps}"></span></div>
+            <div class="r-skills-row" th:if="${ts.tools != ''}"><strong>Tools:</strong> <span th:text="${ts.tools}"></span></div>
+            <div class="r-skills-row" th:if="${ts.concepts != ''}"><strong>Concepts:</strong> <span th:text="${ts.concepts}"></span></div>
+        </div>
+    </div>
+
+    <!-- PROJECTS -->
+    <div class="r-section" th:if="${resume.projects != null and !resume.projects.isEmpty()}">
+        <div class="r-section-title">Projects</div>
+        <div class="r-item" th:each="proj : ${resume.projects}">
+            <div class="r-row">
+                <div>
+                    <span class="r-proj-title" th:text="${proj.name}"></span>
+                    <span class="link-icon" th:if="${proj.link != ''}">&#8599;</span>
+                    <span class="r-proj-tech" th:if="${proj.techStack != ''}" th:text="' | ' + ${proj.techStack}"></span>
+                </div>
+                <span class="r-date" th:text="${proj.year}"></span>
+            </div>
+            <ul class="r-bullet-list" th:if="${proj.description != ''}">
+                <li th:each="line : ${proj.description.split('\n')}" th:if="${!line.isBlank()}" th:text="${line.trim()}"></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- EXPERIENCE -->
+    <div class="r-section" th:if="${resume.workExperiences != null and !resume.workExperiences.isEmpty()}">
+        <div class="r-section-title">Experience</div>
+        <div class="r-item" th:each="exp : ${resume.workExperiences}">
+            <div class="r-row">
+                <span class="r-exp-title" th:text="${exp.position + (exp.company != '' ? ' | ' + exp.company : '')}"></span>
+                <span class="r-date"><span th:text="${exp.startDate}"></span> — <span th:text="${exp.current ? 'Present' : exp.endDate}"></span></span>
+            </div>
+            <ul class="r-bullet-list" th:if="${exp.description != ''}">
+                <li th:each="line : ${exp.description.split('\n')}" th:if="${!line.isBlank()}" th:text="${line.trim()}"></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ACHIEVEMENTS -->
+    <div class="r-section" th:if="${resume.achievements != null and !resume.achievements.isEmpty()}">
+        <div class="r-section-title">Achievement</div>
+        <div class="r-item" th:each="ach : ${resume.achievements}">
+            <div class="r-row">
+                <div><span class="r-exp-title" th:text="${ach.title}"></span><span class="link-icon" th:if="${ach.link != ''}"> &#8599;</span></div>
+                <span class="r-date" th:text="${ach.date}"></span>
+            </div>
+            <div class="r-row" th:if="${ach.role != '' or ach.location != ''}">
+                <span class="r-degree" th:text="${ach.role}"></span>
+                <span class="r-loc" th:text="${ach.location}"></span>
+            </div>
+            <ul class="r-bullet-list" th:if="${ach.description != ''}">
+                <li th:each="line : ${ach.description.split('\n')}" th:if="${!line.isBlank()}" th:text="${line.trim()}"></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- CERTIFICATIONS -->
+    <div class="r-section" th:if="${resume.certifications != null and !resume.certifications.isEmpty()}">
+        <div class="r-section-title">Certifications</div>
+        <ul class="r-cert-list">
+            <li th:each="cert : ${resume.certifications}" th:if="${!cert.isBlank()}" th:text="${cert}"></li>
+        </ul>
+    </div>
+
+    <!-- ADDITIONAL INFORMATION -->
+    <div class="r-section" th:if="${resume.additionalInfo != null and !resume.additionalInfo.isEmpty()}">
+        <div class="r-section-title">Additional Information</div>
+        <ul class="r-addinfo-list">
+            <li th:each="info : ${resume.additionalInfo}" th:if="${!info.isBlank()}" th:text="${info}"></li>
+        </ul>
+    </div>
+</div>
